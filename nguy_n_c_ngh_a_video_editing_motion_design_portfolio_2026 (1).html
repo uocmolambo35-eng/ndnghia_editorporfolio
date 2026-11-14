@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Đức Nghĩa — Video Editor & Content Creator Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts chuẩn tiếng Việt sắc nét & cân đối: Be Vietnam Pro & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Be Vietnam Pro"', 'sans-serif'],
+                        display: ['"Be Vietnam Pro"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        studio: {
+                            bg: '#05050a',
+                            card: '#0c0c18',
+                            cardHover: '#131326',
+                            border: '#1f223d',
+                            volt: '#00f3ff',
+                            pink: '#ff007f',
+                            yellow: '#fcee09',
+                            purple: '#9d00ff',
+                            cyan: '#00f3ff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #05050a;
+            color: #eef2ff;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Cyberpunk Graphic Grid + Circuit Glow Background */
+        .bg-studio-grid {
+            background-color: #05050a;
+            background-image:
+                radial-gradient(circle at 15% 15%, rgba(0, 243, 255, 0.14) 0%, transparent 40%),
+                radial-gradient(circle at 85% 25%, rgba(255, 0, 127, 0.14) 0%, transparent 42%),
+                radial-gradient(circle at 50% 85%, rgba(157, 0, 255, 0.14) 0%, transparent 45%),
+                linear-gradient(to right, rgba(0, 243, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 0, 127, 0.05) 1px, transparent 1px),
+                linear-gradient(135deg, rgba(0, 243, 255, 0.025) 25%, transparent 25%),
+                linear-gradient(225deg, rgba(255, 0, 127, 0.025) 25%, transparent 25%);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px, 96px 96px, 96px 96px;
+            background-attachment: fixed;
+        }
+
+        /* Cyberpunk Perspective Horizon Floor */
+        .cyber-horizon {
+            position: fixed;
+            bottom: -15%;
+            left: -25%;
+            right: -25%;
+            height: 55vh;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(to right, rgba(0, 243, 255, 0.18) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 0, 127, 0.18) 1px, transparent 1px);
+            background-size: 56px 36px;
+            transform: perspective(480px) rotateX(68deg);
+            mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 85%);
+            -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 85%);
+            animation: cyberGridScroll 14s linear infinite;
+        }
+
+        @keyframes cyberGridScroll {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 144px; }
+        }
+
+        /* CRT Scanline & Cyber HUD Overlay */
+        .film-grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 40;
+            opacity: 0.22;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 3px,
+                rgba(0, 243, 255, 0.035) 4px
+            );
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 7px; height: 7px; }
+        ::-webkit-scrollbar-track { background: #05050a; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #00f3ff, #ff007f); border-radius: 99px; }
+
+        /* Cyberpunk Bento Card & Neon Glow */
+        .bento-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(14, 15, 30, 0.88) 0%, rgba(8, 9, 19, 0.94) 100%);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            box-shadow: inset 0 1px 0 rgba(0, 243, 255, 0.14), 0 10px 30px -10px rgba(0, 0, 0, 0.85);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+        .bento-card::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            right: 22px;
+            width: 48px;
+            height: 2px;
+            background: linear-gradient(90deg, #00f3ff, #ff007f);
+            border-radius: 99px;
+            opacity: 0.85;
+        }
+        .bento-card:hover {
+            border-color: rgba(0, 243, 255, 0.65);
+            box-shadow: 0 0 28px -6px rgba(0, 243, 255, 0.35), 0 0 40px -15px rgba(255, 0, 127, 0.3);
+        }
+
+        /* Neon Text & Button Glow */
+        .cyber-text-glow {
+            text-shadow: 0 0 18px rgba(0, 243, 255, 0.55), 0 0 36px rgba(255, 0, 127, 0.25);
+        }
+        .cyber-btn-primary {
+            background: linear-gradient(135deg, #00f3ff 0%, #38bdf8 55%, #ff007f 140%);
+            color: #040409;
+            box-shadow: 0 0 22px rgba(0, 243, 255, 0.4);
+        }
+        .cyber-btn-primary:hover {
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.7), 0 0 18px rgba(255, 0, 127, 0.5);
+            filter: brightness(1.08);
+        }
+
+        /* Glass Floating Header */
+        .glass-dock {
+            background: rgba(9, 10, 22, 0.82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(0, 243, 255, 0.28);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75), inset 0 0 20px rgba(0, 243, 255, 0.05);
+        }
+
+        /* Video Thumbnail Hover */
+        .work-item:hover .work-thumb {
+            transform: scale(1.05);
+        }
+        .work-item:hover .play-pill {
+            background: linear-gradient(135deg, #00f3ff, #ff007f);
+            color: #05050a;
+            box-shadow: 0 0 24px rgba(0, 243, 255, 0.8);
+            transform: scale(1.1);
+        }
+
+        /* Print CV Styling - Khi nhấn In / Lưu PDF chỉ in đúng trang CV A4 */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #cv-printable-sheet, #cv-printable-sheet * {
+                visibility: visible;
+            }
+            #cv-printable-sheet {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-studio-grid antialiased selection:bg-studio-volt selection:text-black">
+
+    <!-- Cyberpunk Scanlines & Animated Horizon Grid -->
+    <div class="film-grain"></div>
+    <div class="cyber-horizon"></div>
+
+    <!-- Cyberpunk Graphic SVG HUD & Neon Orbs -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-[480px] h-[480px] bg-cyan-500/15 rounded-full blur-[130px]"></div>
+        <div class="absolute top-1/3 -right-24 w-[460px] h-[460px] bg-pink-600/15 rounded-full blur-[140px]"></div>
+        <div class="absolute bottom-0 left-1/3 w-[440px] h-[440px] bg-purple-600/15 rounded-full blur-[130px]"></div>
+
+        <!-- Graphic HUD Rings & Geometric Accents -->
+        <svg class="absolute top-20 right-6 w-72 h-72 opacity-20 text-cyan-400 hidden lg:block" viewBox="0 0 200 200" fill="none">
+            <circle cx="100" cy="100" r="88" stroke="currentColor" stroke-width="0.8" stroke-dasharray="6 6"/>
+            <circle cx="100" cy="100" r="68" stroke="#ff007f" stroke-width="1" stroke-dasharray="28 12"/>
+            <polygon points="100,22 168,140 32,140" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
+            <line x1="0" y1="100" x2="200" y2="100" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+            <line x1="100" y1="0" x2="100" y2="200" stroke="currentColor" stroke-width="0.5" opacity="0.5"/>
+        </svg>
+        <svg class="absolute bottom-24 left-6 w-64 h-64 opacity-20 text-pink-500 hidden lg:block" viewBox="0 0 200 200" fill="none">
+            <rect x="25" y="25" width="150" height="150" stroke="currentColor" stroke-width="0.8" stroke-dasharray="10 5"/>
+            <rect x="48" y="48" width="104" height="104" stroke="#00f3ff" stroke-width="0.8" transform="rotate(45 100 100)"/>
+            <circle cx="100" cy="100" r="24" stroke="currentColor" stroke-width="1"/>
+        </svg>
+    </div>
+
+    <!-- FLOATING TOP DOCK NAVIGATION -->
+    <header class="fixed top-3 inset-x-0 z-30 px-4">
+        <nav class="max-w-6xl mx-auto glass-dock rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between shadow-2xl">
+            <a href="#profile" class="flex items-center gap-3 group">
+                <div class="w-9 h-9 rounded-xl bg-zinc-900 border border-studio-volt/60 overflow-hidden shrink-0 group-hover:scale-105 transition-transform">
+                    <img src="retouch_2026031919165717.jpg" alt="Nguyễn Đức Nghĩa" onerror="this.src='https://placehold.co/200x200/131318/00f3ff?text=NDN'" class="avatar-preview w-full h-full object-cover object-top">
+                </div>
+                <div class="leading-tight">
+                    <span class="font-display font-bold text-sm tracking-tight text-white block">NGUYỄN ĐỨC NGHĨA</span>
+                    <span class="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">Video Editor & Content Creator</span>
+                </div>
+            </a>
+
+            <!-- Center Links -->
+            <div class="hidden md:flex items-center gap-7 text-xs font-medium text-zinc-300">
+                <a href="#profile" class="hover:text-studio-volt transition-colors">Hồ Sơ & Kỹ Năng</a>
+                <a href="#experience" class="hover:text-studio-volt transition-colors">Kinh Nghiệm</a>
+                <a href="#works" class="hover:text-studio-volt transition-colors">Dự Án Video</a>
+                <a href="#contact" class="hover:text-studio-volt transition-colors">Liên Hệ</a>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-2.5">
+                <button onclick="openCvModal()" class="px-3.5 py-2 rounded-xl bg-slate-950/90 hover:bg-slate-900 border border-cyan-500/40 text-xs font-medium text-cyan-200 flex items-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-file-lines text-studio-volt"></i>
+                    <span class="hidden sm:inline">Xem CV</span>
+                </button>
+                <a href="#contact" class="px-4 py-2 rounded-xl cyber-btn-primary font-bold text-xs tracking-wider transition-all">
+                    BOOKING
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 01. PROFILE & CORE SKILLS SECTION (ĐƯA LÊN ĐẦU TRANG) -->
+    <section id="profile" class="relative z-10 pt-28 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <!-- Top Status Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-7">
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-950/90 border border-cyan-500/35 text-xs font-medium text-cyan-100 shadow-lg shadow-cyan-500/10">
+                <span class="w-2 h-2 rounded-full bg-studio-volt animate-ping"></span>
+                <span>SYS.ONLINE // Sẵn sàng nhận dự án Freelance & Hợp tác Full-time</span>
+            </div>
+            <div class="font-mono text-xs text-pink-400">
+                [ LOC: ĐÀ NẴNG • QUẢNG NAM • REMOTE ]
+            </div>
+        </div>
+
+        <!-- Bento Profile Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <!-- Main Intro Card (7 cols) -->
+            <div class="lg:col-span-7 bento-card rounded-3xl p-6 sm:p-9 flex flex-col justify-between">
+                <div>
+                    <!-- Avatar + Name Header -->
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-5 mb-6">
+                        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-studio-volt/80 shadow-xl shadow-studio-volt/10 shrink-0 bg-zinc-900 group">
+                            <img src="retouch_2026031919165717.jpg" alt="Nguyễn Đức Nghĩa" onerror="this.src='https://placehold.co/300x300/131318/00f3ff?text=NDN'" class="avatar-preview w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2 mb-2">
+                                <span class="px-2.5 py-1 rounded-md bg-cyan-500/15 border border-cyan-400/50 font-mono text-[11px] font-semibold text-studio-volt">
+                                    VIDEO EDITOR & CONTENT CREATOR
+                                </span>
+                                <span class="px-2.5 py-1 rounded-md bg-pink-500/15 border border-pink-500/40 font-mono text-[11px] text-pink-300">
+                                    5+ NĂM KINH NGHIỆM
+                                </span>
+                            </div>
+
+                            <h1 id="hero-name" class="font-display font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-white cyber-text-glow tracking-tight leading-[1.15]">
+                                NGUYỄN ĐỨC NGHĨA
+                            </h1>
+                        </div>
+                    </div>
+
+                    <p id="hero-bio" class="text-zinc-300 text-sm sm:text-base leading-relaxed font-normal max-w-2xl">
+                        Editor & Content Creator với hơn 5 năm kinh nghiệm thực chiến trong lĩnh vực Media và Truyền thông Marketing, chuyên sâu xây dựng nội dung video chuyển đổi cao trên TikTok và Facebook. Trực tiếp đảm nhận trọn gói từ lên kịch bản, quay phim, hậu kỳ dựng cắt đến tư duy tối ưu quảng cáo cho doanh nghiệp.
+                    </p>
+                </div>
+
+                <!-- Quick Contact & Action Buttons -->
+                <div class="mt-8 pt-6 border-t border-cyan-500/20 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex flex-wrap items-center gap-3">
+                        <a href="#experience" class="px-5 py-3 rounded-xl cyber-btn-primary font-bold text-xs sm:text-sm inline-flex items-center gap-2 transition-all">
+                            <span>Xem Kinh Nghiệm</span>
+                            <i class="fa-solid fa-arrow-down text-xs"></i>
+                        </a>
+                        <a href="#works" class="px-5 py-3 rounded-xl bg-slate-950/90 hover:bg-slate-900 border border-pink-500/50 text-white font-semibold text-xs sm:text-sm inline-flex items-center gap-2 transition-all shadow-md shadow-pink-500/10">
+                            <i class="fa-solid fa-play text-pink-400 text-xs"></i>
+                            <span>Kho Video Sản Phẩm</span>
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs text-zinc-400 font-mono">
+                        <a href="tel:0388028071" class="hover:text-studio-volt transition-colors">
+                            <i class="fa-solid fa-phone text-studio-volt mr-1"></i><span id="hero-phone">038 802 8071</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Skills + Education + Direct Contact (5 cols) -->
+            <div class="lg:col-span-5 flex flex-col gap-5">
+                <!-- Technical Stack Card -->
+                <div class="bento-card rounded-3xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-mono text-xs text-studio-volt uppercase tracking-wider font-semibold">// Kỹ Năng Chuyên Môn</span>
+                        <span class="font-mono text-[11px] text-pink-400">PRODUCTION & POST</span>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                        <div class="p-3 rounded-2xl bg-slate-950/90 border border-cyan-500/20 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-[#00005B] border border-[#9999FF]/40 text-[#9999FF] font-bold text-xs flex items-center justify-center shrink-0">Pr</span>
+                            <div class="min-w-0">
+                                <div class="text-xs font-semibold text-white truncate">Premiere Pro</div>
+                                <div class="text-[10px] text-zinc-400">Dựng chính</div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-slate-950/90 border border-cyan-500/20 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-[#00005B] border border-[#9999FF]/40 text-[#9999FF] font-bold text-xs flex items-center justify-center shrink-0">Ae</span>
+                            <div class="min-w-0">
+                                <div class="text-xs font-semibold text-white truncate">After Effects</div>
+                                <div class="text-[10px] text-zinc-400">Motion / VFX</div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-slate-950/90 border border-cyan-500/20 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-cyan-500/15 border border-cyan-400/30 text-studio-volt text-xs flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-video"></i>
+                            </span>
+                            <div class="min-w-0">
+                                <div class="text-xs font-semibold text-white truncate">Quay Phim</div>
+                                <div class="text-[10px] text-zinc-400">Camera / Setup</div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-slate-950/90 border border-cyan-500/20 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-[#001E36] border border-[#31A8FF]/40 text-[#31A8FF] font-bold text-xs flex items-center justify-center shrink-0">Ps</span>
+                            <div class="min-w-0">
+                                <div class="text-xs font-semibold text-white truncate">Photoshop</div>
+                                <div class="text-[10px] text-zinc-400">Thumbnail / Key</div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-slate-950/90 border border-cyan-500/20 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-[#330000] border border-[#FF9A00]/40 text-[#FF9A00] font-bold text-xs flex items-center justify-center shrink-0">Ai</span>
+                            <div class="min-w-0">
+                                <div class="text-xs font-semibold text-white truncate">Illustrator</div>
+                                <div class="text-[10px] text-zinc-400">Đồ họa Vector</div>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-slate-950/90 border border-cyan-500/20 flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-lg bg-pink-500/15 border border-pink-500/30 text-pink-300 text-xs flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-bullhorn"></i>
+                            </span>
+                            <div class="min-w-0">
+                                <div class="text-xs font-semibold text-white truncate">Social Ads</div>
+                                <div class="text-[10px] text-zinc-400">TikTok / FB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Original CV Card -->
+                <div class="bento-card rounded-3xl p-6 flex items-center justify-between gap-4">
+                    <div>
+                        <span class="font-mono text-[11px] text-studio-volt uppercase tracking-wider block mb-1">// Học Vấn & Nền Tảng</span>
+                        <h3 class="font-display font-bold text-base text-white">ĐH Duy Tân Đà Nẵng</h3>
+                        <p class="text-xs text-zinc-300 mt-0.5">Cử nhân Thiết kế Đồ họa • <span class="text-studio-volt font-medium">Điểm A chuyên ngành Media</span></p>
+                    </div>
+                    <button onclick="openCvModal()" class="shrink-0 px-3.5 py-2 rounded-xl cyber-btn-primary text-xs font-bold flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-file-lines"></i>
+                        <span>Xem CV</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent"></div>
+    </div>
+
+    <!-- 02. EXPERIENCE TIMELINE SECTION -->
+    <section id="experience" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div>
+                <span class="font-mono text-xs text-pink-400 uppercase tracking-widest block mb-2">// 02. WORK HISTORY</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
+                    KINH NGHIỆM <span class="text-studio-volt cyber-text-glow">THỰC CHIẾN</span>
+                </h2>
+            </div>
+            <button onclick="openCvModal()" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-950/90 hover:bg-slate-900 border border-cyan-400/50 text-xs font-bold text-studio-volt transition-all shadow-lg shadow-cyan-500/10">
+                <i class="fa-solid fa-id-card"></i>
+                <span>Xem Bản CV Đầy Đủ Trực Tiếp</span>
+            </button>
+        </div>
+
+        <!-- Experience Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Role 1: Freelancer -->
+            <div class="bento-card rounded-3xl p-6 sm:p-7 border-l-4 border-l-pink-500">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="px-2.5 py-1 rounded-md bg-cyan-500/15 border border-cyan-400/30 text-studio-volt font-mono text-xs font-bold">2019 — NAY</span>
+                    <span class="font-mono text-xs text-pink-300">Đa lĩnh vực • Doanh nghiệp</span>
+                </div>
+                <h3 class="font-display font-bold text-lg sm:text-xl text-white mb-3">Freelancer — Video Editor & Support Marketing</h3>
+                <ul class="space-y-2 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Quay và dựng video content TikTok / Facebook đa lĩnh vực: tài chính, giáo dục, thời trang, ứng dụng giải trí...</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Sản xuất và dựng phim sự kiện Teambuilding, Year End Party, Half Year cho các doanh nghiệp.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Role 2: Thiện Nhân Hospital -->
+            <div class="bento-card rounded-3xl p-6 sm:p-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-cyan-500/30 text-cyan-200 font-mono text-xs font-semibold">02/2023 — 08/2024</span>
+                    <span class="font-mono text-xs text-zinc-400">Đà Nẵng & Quảng Ngãi</span>
+                </div>
+                <h3 class="font-display font-bold text-lg sm:text-xl text-white mb-3">Thiện Nhân Hospital — Media & Content Creator</h3>
+                <ul class="space-y-2 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Phụ trách quay và dựng toàn bộ video truyền thông cho cơ sở Thiện Nhân Đà Nẵng và Quảng Ngãi.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Lên kịch bản xây dựng kênh TikTok thương hiệu và triển khai kế hoạch Marketing ưu đãi trên Facebook.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Role 3: Quà Tặng Quang Vũ -->
+            <div class="bento-card rounded-3xl p-6 sm:p-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-cyan-500/30 text-cyan-200 font-mono text-xs font-semibold">MEDIA & ADS</span>
+                    <span class="font-mono text-xs text-zinc-400">Quảng Nam</span>
+                </div>
+                <h3 class="font-display font-bold text-lg sm:text-xl text-white mb-3">Quà Tặng Quang Vũ — Video Editor & Facebook Ads</h3>
+                <ul class="space-y-2 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Quay và dựng video giới thiệu sản phẩm, quy trình sản xuất truyền thông cho công ty Quà Tặng Quang Vũ.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Trực tiếp lên kế hoạch và vận hành chiến dịch quảng cáo trên nền tảng Facebook cho Fanpage doanh nghiệp.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Role 4: Hao Apple / MR2 Coffee & Tea -->
+            <div class="bento-card rounded-3xl p-6 sm:p-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-cyan-500/30 text-cyan-200 font-mono text-xs font-semibold">SOCIAL CONTENT</span>
+                    <span class="font-mono text-xs text-zinc-400">Bán lẻ & F&B</span>
+                </div>
+                <h3 class="font-display font-bold text-lg sm:text-xl text-white mb-3">Hao Apple / MR2 Coffee & Tea — Content & Media</h3>
+                <ul class="space-y-2 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Lên kịch bản, quay và dựng chuỗi video content trên TikTok & Facebook cho hệ thống cửa hàng iPhone và Cà phê.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Xây dựng Plan Ads cho các chiến dịch kích cầu bán hàng vào các dịp lễ lớn.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Role 5: Thành Vinh Holdings -->
+            <div class="bento-card rounded-3xl p-6 sm:p-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-cyan-500/30 text-cyan-200 font-mono text-xs font-semibold">2021 — 02/2023</span>
+                    <span class="font-mono text-xs text-zinc-400">VN • Campuchia • Malaysia</span>
+                </div>
+                <h3 class="font-display font-bold text-lg sm:text-xl text-white mb-3">Thành Vinh Holdings — Media Creator</h3>
+                <ul class="space-y-2 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Sáng tạo video content chủ lực cho TikTok và Facebook, đồng thời sản xuất video truyền thông nội bộ công ty.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Lập kế hoạch Marketing dài hạn đưa sản phẩm tiếp cận đa tệp khách hàng tại thị trường Việt Nam và Đông Nam Á.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Role 6: Xưởng phim Én Bạc -->
+            <div class="bento-card rounded-3xl p-6 sm:p-7">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-cyan-500/30 text-cyan-200 font-mono text-xs font-semibold">2019 — 2021</span>
+                    <span class="font-mono text-xs text-zinc-400">ĐH Duy Tân Đà Nẵng</span>
+                </div>
+                <h3 class="font-display font-bold text-lg sm:text-xl text-white mb-3">CTV — Xưởng Phim Én Bạc (ĐH Duy Tân)</h3>
+                <ul class="space-y-2 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Quay và dựng các video truyền thông sinh viên phát hành trên Fanpage chính thức MyDTU.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="text-studio-volt mt-1">•</span>
+                        <span>Tham gia hỗ trợ sản xuất tiền kỳ & hậu kỳ các dự án phim ngắn, phóng sự theo yêu cầu của Xưởng phim.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="h-px bg-gradient-to-r from-transparent via-pink-500/40 to-transparent"></div>
+    </div>
+
+    <!-- 03. SELECTED PROJECTS / VIDEO PORTFOLIO SECTION -->
+    <section id="works" class="relative z-10 py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+            <div>
+                <span class="font-mono text-xs text-pink-400 uppercase tracking-widest block mb-2">// 03. SELECTED PROJECTS</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight">
+                    DỰ ÁN VIDEO <span class="text-studio-volt cyber-text-glow">TIÊU BIỂU</span>
+                </h2>
+                <p class="text-zinc-400 text-xs sm:text-sm mt-2 max-w-xl">
+                    Lựa chọn danh mục bên dưới và bấm vào từng dự án để xem trực tiếp sản phẩm video hoàn chỉnh.
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div id="filter-tabs" class="flex flex-wrap gap-2">
+                <button onclick="filterWorks('all')" data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold cyber-btn-primary transition-all">Tất Cả</button>
+                <button onclick="filterWorks('tiktok')" data-filter="tiktok" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-slate-950/90 text-zinc-300 hover:text-cyan-300 hover:border-cyan-500/40 border border-slate-800 transition-all">TikTok / Reels</button>
+                <button onclick="filterWorks('motion')" data-filter="motion" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-slate-950/90 text-zinc-300 hover:text-cyan-300 hover:border-cyan-500/40 border border-slate-800 transition-all">Motion Graphic</button>
+                <button onclick="filterWorks('wedding')" data-filter="wedding" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-slate-950/90 text-zinc-300 hover:text-cyan-300 hover:border-cyan-500/40 border border-slate-800 transition-all">Film Wedding</button>
+                <button onclick="filterWorks('tvc')" data-filter="tvc" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-slate-950/90 text-zinc-300 hover:text-cyan-300 hover:border-cyan-500/40 border border-slate-800 transition-all">TVC & Thương Hiệu</button>
+                <button onclick="filterWorks('event')" data-filter="event" class="filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-slate-950/90 text-zinc-300 hover:text-cyan-300 hover:border-cyan-500/40 border border-slate-800 transition-all">Sự Kiện & YEP</button>
+            </div>
+        </div>
+
+        <!-- Bento Portfolio Grid -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Injected via JS -->
+        </div>
+
+        <!-- Banner kho lưu trữ Google Drive -->
+        <div class="mt-14 p-6 sm:p-8 rounded-3xl bento-card flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-start sm:items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-studio-volt/15 border border-studio-volt/30 text-studio-volt flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-brands fa-google-drive"></i>
+                </div>
+                <div>
+                    <h3 class="font-display font-bold text-base sm:text-lg text-white">Xem toàn bộ kho lưu trữ video trên Google Drive</h3>
+                    <p class="text-xs sm:text-sm text-zinc-400 mt-1">Bao gồm đầy đủ các file video chất lượng cao và các dự án từng thực hiện của Nguyễn Đức Nghĩa.</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-3 shrink-0 w-full sm:w-auto">
+                <button onclick="openCvModal()" class="flex-1 sm:flex-initial px-4 py-3 rounded-xl bg-slate-950/90 hover:bg-slate-900 border border-cyan-500/40 text-xs font-semibold text-cyan-200 transition-all">
+                    Xem CV Trực Tiếp
+                </button>
+                <a href="https://drive.google.com/drive/folders/1bJhBNOGhMBwTUYWisb1QiFxhCozRl9zn?usp=drive_link" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-5 py-3 rounded-xl cyber-btn-primary font-bold text-xs text-center transition-all">
+                    Mở Kho Video Drive ↗
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04. FOOTER & CONTACT SECTION -->
+    <footer id="contact" class="relative z-10 border-t border-cyan-500/20 bg-[#040409]/95 pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-cyan-500/15">
+                <div class="lg:col-span-7">
+                    <span class="font-mono text-xs text-pink-400 uppercase tracking-widest block mb-3">// 04. LET'S COLLABORATE</span>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-white leading-tight mb-4">
+                        SẴN SÀNG ĐỒNG HÀNH CÙNG <span class="text-studio-volt cyber-text-glow">DỰ ÁN CỦA BẠN</span>
+                    </h2>
+                    <p class="text-zinc-400 text-sm max-w-lg leading-relaxed">
+                        Liên hệ trực tiếp qua điện thoại, Zalo hoặc Email để trao đổi về kịch bản, báo giá quay dựng video hoặc vị trí Video Editor / Content Creator.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-5 flex flex-col justify-center gap-3">
+                    <a href="tel:0388028071" class="p-4 rounded-2xl bento-card flex items-center justify-between group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl cyber-btn-primary flex items-center justify-center text-base">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <span class="font-mono text-[10px] text-zinc-400 uppercase block">Điện thoại / Zalo</span>
+                                <span id="contact-phone-display" class="font-display font-bold text-base sm:text-lg text-white">038 802 8071</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-zinc-500 group-hover:text-studio-volt transition-colors"></i>
+                    </a>
+
+                    <a href="mailto:nghiabeo307@gmail.com" class="p-4 rounded-2xl bento-card flex items-center justify-between group">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-700 text-studio-volt flex items-center justify-center text-base">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <span class="font-mono text-[10px] text-zinc-400 uppercase block">Email liên hệ</span>
+                                <span id="contact-email-display" class="font-display font-bold text-sm sm:text-base text-white">nghiabeo307@gmail.com</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-zinc-500 group-hover:text-studio-volt transition-colors"></i>
+                    </a>
+
+                    <div class="px-4 py-3 rounded-2xl bg-zinc-950 border border-zinc-900 text-xs text-zinc-400 flex items-center gap-2.5">
+                        <i class="fa-solid fa-location-dot text-studio-volt"></i>
+                        <span id="contact-address-display">103 Trần Quý Cáp, P. Tân Thạnh, TP. Tam Kỳ, Quảng Nam</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 font-mono">
+                <p>© 2026 NGUYỄN ĐỨC NGHĨA — VIDEO EDITOR & CONTENT CREATOR.</p>
+                <button onclick="openCvModal()" class="text-zinc-400 hover:text-studio-volt underline underline-offset-4">Xem hồ sơ CV trực tuyến</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- VIDEO PLAYER MODAL (Hỗ trợ tự động khung 9:16 dọc & 16:9 ngang) -->
+    <div id="player-modal" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-xl flex items-center justify-center p-4">
+        <div id="player-container" class="relative w-full max-w-5xl bg-[#111116] border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl transition-all">
+            <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-800/80">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <span class="w-2.5 h-2.5 rounded-full bg-studio-volt shrink-0"></span>
+                    <h3 id="modal-title" class="font-display font-bold text-sm sm:text-base text-white truncate">Đang phát video</h3>
+                </div>
+                <button onclick="closePlayer()" class="w-8 h-8 rounded-full bg-zinc-900 hover:bg-red-500/20 hover:text-red-400 text-zinc-400 flex items-center justify-center transition-colors shrink-0">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="modal-media-box" class="w-full aspect-video bg-black flex items-center justify-center">
+                <!-- Video / Google Drive Iframe -->
+            </div>
+            <div class="px-5 py-4 bg-zinc-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <p id="modal-desc" class="text-xs sm:text-sm text-zinc-300"></p>
+                <a id="modal-drive-link" href="#" target="_blank" rel="noopener noreferrer" class="shrink-0 text-xs font-mono text-studio-volt hover:underline">
+                    Mở trên Google Drive ↗
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL XEM CV TRỰC TIẾP TRÊN SITE (KHÔNG QUA DRIVE) -->
+    <div id="cv-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-xl flex items-start justify-center p-3 sm:p-6 overflow-y-auto">
+        <div class="w-full max-w-4xl my-4 sm:my-6">
+            <!-- Top Action Bar -->
+            <div class="glass-dock rounded-2xl px-4 sm:px-6 py-3.5 mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-studio-volt"></span>
+                    <span class="font-display font-bold text-xs sm:text-sm text-white">CV_NguyenDucNghia_2026.pdf — Bản Xem Trực Tiếp</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-studio-volt hover:bg-lime-300 text-black font-bold text-xs flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-print"></i>
+                        <span>In / Lưu File PDF</span>
+                    </button>
+                    <button onclick="closeCvModal()" class="w-9 h-9 rounded-xl bg-zinc-900 hover:bg-red-500/20 hover:text-red-400 text-zinc-300 flex items-center justify-center transition-colors">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- A4 Resume Sheet -->
+            <div id="cv-printable-sheet" class="bg-[#121216] text-zinc-100 rounded-3xl border border-zinc-800 shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12">
+                <!-- Cột Trái CV (4 cols) -->
+                <div class="md:col-span-4 bg-[#18181f] p-6 sm:p-8 border-b md:border-b-0 md:border-r border-zinc-800 space-y-7">
+                    <!-- Avatar & Chức danh -->
+                    <div class="text-center md:text-left">
+                        <div class="w-28 h-28 sm:w-32 sm:h-32 mx-auto md:mx-0 rounded-2xl overflow-hidden border-2 border-studio-volt shadow-lg bg-zinc-900 mb-4">
+                            <img src="retouch_2026031919165717.jpg" alt="Nguyễn Đức Nghĩa" onerror="this.src='https://placehold.co/300x300/131318/00f3ff?text=NDN'" class="avatar-preview w-full h-full object-cover object-top">
+                        </div>
+                        <h2 class="font-display font-extrabold text-xl text-white tracking-tight">NGUYỄN ĐỨC NGHĨA</h2>
+                        <div class="mt-2 inline-flex flex-col gap-1">
+                            <span class="px-2.5 py-1 rounded-md bg-studio-volt text-black font-bold text-[11px] tracking-wide uppercase">VIDEO EDITOR</span>
+                            <span class="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-200 font-semibold text-[11px] tracking-wide uppercase">CONTENT CREATOR</span>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin liên hệ -->
+                    <div class="space-y-2.5 pt-2 border-t border-zinc-800/80">
+                        <h3 class="font-mono text-xs font-bold text-studio-volt uppercase tracking-wider">THÔNG TIN LIÊN HỆ</h3>
+                        <ul class="space-y-2.5 text-xs text-zinc-300">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-cake-candles text-studio-volt mt-0.5 w-4"></i>
+                                <span>30/07/1999</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-phone text-studio-volt mt-0.5 w-4"></i>
+                                <span class="font-semibold text-white">038 802 8071</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-envelope text-studio-volt mt-0.5 w-4"></i>
+                                <span class="break-all">nghiabeo307@gmail.com</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-location-dot text-studio-volt mt-0.5 w-4"></i>
+                                <span>103 Trần Quý Cáp, P. Tân Thạnh, Tp. Tam Kỳ</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Học vấn -->
+                    <div class="space-y-2 pt-2 border-t border-zinc-800/80">
+                        <h3 class="font-mono text-xs font-bold text-studio-volt uppercase tracking-wider">CÁC TRƯỜNG ĐÃ THEO HỌC</h3>
+                        <div class="text-xs space-y-1">
+                            <p class="font-bold text-white text-sm">ĐH DUY TÂN ĐÀ NẴNG</p>
+                            <p class="text-studio-volt font-medium">Cử nhân Đại Học Ngành Thiết kế đồ hoạ</p>
+                            <ul class="text-zinc-300 space-y-1 pt-1.5 leading-relaxed">
+                                <li>• Điểm A trong các môn chuyên ngành về Media</li>
+                                <li>• Có kinh nghiệm và kiến thức về Media</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Kỹ năng chuyên môn -->
+                    <div class="space-y-2.5 pt-2 border-t border-zinc-800/80">
+                        <h3 class="font-mono text-xs font-bold text-studio-volt uppercase tracking-wider">KỸ NĂNG CHUYÊN MÔN</h3>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-white font-medium">Adobe Premiere</span>
+                            <span class="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-white font-medium">Adobe After Effect</span>
+                            <span class="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-white font-medium">Kỹ năng quay</span>
+                            <span class="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-white font-medium">Adobe Photoshop</span>
+                            <span class="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-xs text-white font-medium">Adobe Illustrator</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột Phải CV (8 cols) -->
+                <div class="md:col-span-8 p-6 sm:p-8 space-y-7">
+                    <!-- Tiểu sử cá nhân -->
+                    <div class="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-5">
+                        <h3 class="font-mono text-xs font-bold text-studio-volt uppercase tracking-wider mb-2">TIỂU SỬ CÁ NHÂN</h3>
+                        <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">
+                            Em là một <strong class="text-white">Editor - Content Creator</strong> đã có hơn 5 năm kinh nghiệm trong lĩnh vực Media và Truyền thông Marketing, đặc biệt là Marketing trên các nền tảng social như Tiktok, Facebook. Với kinh nghiệm của mình, em hi vọng rằng sẽ đáp ứng đủ các nhu cầu mà nhà tuyển dụng đưa ra và sẽ được hợp tác làm việc lâu dài.
+                        </p>
+                    </div>
+
+                    <!-- Tóm tắt kinh nghiệm -->
+                    <div class="space-y-5">
+                        <h3 class="font-mono text-xs font-bold text-studio-volt uppercase tracking-wider border-b border-zinc-800 pb-2">TÓM TẮT KINH NGHIỆM LÀM VIỆC</h3>
+
+                        <!-- Item 1 -->
+                        <div class="relative pl-4 border-l-2 border-studio-volt">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <h4 class="font-bold text-sm sm:text-base text-white">Freelancer - Editor & Support Marketing</h4>
+                                <span class="font-mono text-xs font-bold text-studio-volt bg-studio-volt/10 px-2.5 py-0.5 rounded-md">2019 - Nay</span>
+                            </div>
+                            <ul class="mt-2 space-y-1 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                                <li>• Quay và dựng các Video Content Tiktok / Facebook cho các kênh Tiktok đa lĩnh vực như tài chính, giáo dục, thời trang, app giải trí v.v...</li>
+                                <li>• Dựng các video Teambuilding, Year End Party, Half Year cho các doanh nghiệp.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="relative pl-4 border-l-2 border-zinc-700">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <h4 class="font-bold text-sm sm:text-base text-white">Thiện Nhân Hospital</h4>
+                                <span class="font-mono text-xs text-zinc-400 bg-zinc-900 px-2.5 py-0.5 rounded-md">02/2023 - 08/2024</span>
+                            </div>
+                            <ul class="mt-2 space-y-1 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                                <li>• Phụ trách quay và dựng video cho Thiện Nhân Đà Nẵng và Thiện Nhân Quảng Ngãi.</li>
+                                <li>• Lên kịch bản để build kênh tiktok cho Thiện Nhân.</li>
+                                <li>• Lên kế hoạch Marketing cho các chương trình ưu đãi tại Bệnh Viện, quảng bá trên Facebook.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="relative pl-4 border-l-2 border-zinc-700">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <h4 class="font-bold text-sm sm:text-base text-white">Quà Tặng Quang Vũ</h4>
+                            </div>
+                            <ul class="mt-2 space-y-1 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                                <li>• Phụ trách quay và dựng video truyền thông cho công ty Quà Tặng Quang Vũ.</li>
+                                <li>• Phụ trách - Lên kế hoạch chạy quảng cáo trên nền tảng Facebook cho Fanpage công ty.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="relative pl-4 border-l-2 border-zinc-700">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <h4 class="font-bold text-sm sm:text-base text-white">Hao Apple / MR2 Coffee & Tea</h4>
+                            </div>
+                            <ul class="mt-2 space-y-1 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                                <li>• Phụ trách lên kịch bản, quay và dựng video content trên 2 nền tảng FB / Tiktok cho 2 cửa hàng (iPhone & Cà Phê).</li>
+                                <li>• Lên Plan Ads cho chiến dịch quảng cáo vào các dịp lễ cho cửa hàng iPhone.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="relative pl-4 border-l-2 border-zinc-700">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <h4 class="font-bold text-sm sm:text-base text-white">Thành Vinh Holdings</h4>
+                                <span class="font-mono text-xs text-zinc-400 bg-zinc-900 px-2.5 py-0.5 rounded-md">2021 - 02/2023</span>
+                            </div>
+                            <ul class="mt-2 space-y-1 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                                <li>• Media Creator - Sáng tạo Content Video cho 2 nền tảng chính là Tiktok và Facebook.</li>
+                                <li>• Lên kế hoạch Marketing dài hạn cho các sản phẩm phụ trách tại các thị trường: Việt Nam, Campuchia, Malaysia v.v...</li>
+                                <li>• Lập các chiến lược Marketing đưa sản phẩm đến tay các tệp khách hàng khác nhau.</li>
+                                <li>• Quay và dựng các video truyền thông nội bộ tại Công ty.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Item 6 -->
+                        <div class="relative pl-4 border-l-2 border-zinc-700">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <h4 class="font-bold text-sm sm:text-base text-white">CTV - Xưởng phim Én Bạc (ĐH Duy Tân)</h4>
+                                <span class="font-mono text-xs text-zinc-400 bg-zinc-900 px-2.5 py-0.5 rounded-md">2019 - 2021</span>
+                            </div>
+                            <ul class="mt-2 space-y-1 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                                <li>• Quay và dựng các video cho Fanpage MyDTU.</li>
+                                <li>• Hỗ trợ quay và dựng các video theo yêu cầu của Xưởng phim.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/1bJhBNOGhMBwTUYWisb1QiFxhCozRl9zn?usp=drive_link";
+        const STORAGE_KEY = "ndn_portfolio_2026_v3";
+
+        // =========================================================================
+        // HƯỚNG DẪN THAY ẢNH ĐẠI DIỆN OFFLINE:
+        // 1. Copy file ảnh chân dung của bạn vào CÙNG THƯ MỤC với file index.html này
+        //    (Ví dụ đặt tên file ảnh là: avatar.jpg hoặc avatar.png)
+        // 2. Thay đổi tên file bên dưới cho khớp với tên file ảnh của bạn:
+        // =========================================================================
+        const MY_AVATAR_PATH = "./avatar.jpg";
+
+        const defaultPortfolioData = {
+            name: "NGUYỄN ĐỨC NGHĨA",
+            avatarUrl: "./avatar.jpg",
+            phone: "038 802 8071",
+            email: "nghiabeo307@gmail.com",
+            address: "103 Trần Quý Cáp, P. Tân Thạnh, TP. Tam Kỳ, Quảng Nam",
+            bio: "Editor & Content Creator với hơn 5 năm kinh nghiệm thực chiến trong lĩnh vực Media và Truyền thông Marketing, chuyên sâu xây dựng nội dung video chuyển đổi cao trên TikTok và Facebook. Trực tiếp đảm nhận trọn gói từ lên kịch bản, quay phim, hậu kỳ dựng cắt đến tư duy tối ưu quảng cáo cho doanh nghiệp.",
+            projects: [
+                {
+                    id: 1,
+                    title: "Motion Graphic — Intro & Kinetic Typography",
+                    category: "motion",
+                    client: "Motion Design Showcase",
+                    duration: "00:35",
+                    ratio: "16:9",
+                    tools: "After Effects • Illustrator",
+                    thumb: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80",
+                    videoUrl: "https://drive.google.com/file/d/1PSQ9l_SqifjTl0olMuZmfySk5TQ5Bwp4/view?usp=drive_link",
+                    desc: "Thiết kế chuyển động đồ họa (2D Motion Graphic), Kinetic Typography và hiệu ứng chuyển cảnh mượt mà cho intro thương hiệu."
+                },
+                {
+                    id: 2,
+                    title: "Film Wedding — Highlight & Pre-Wedding Cinematic",
+                    category: "wedding",
+                    client: "Wedding Film Production",
+                    duration: "03:45",
+                    ratio: "16:9",
+                    tools: "Premiere Pro • Color Grading",
+                    thumb: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80",
+                    videoUrl: "https://drive.google.com/file/d/1eN4J4PH-4ZBo8OfEYQy-_0BuUMZfcsHg/view?usp=drive_link",
+                    desc: "Dựng phim phóng sự cưới và Pre-Wedding mang màu sắc điện ảnh, xử lý âm thanh cảm xúc và chỉnh màu đồng bộ."
+                },
+                {
+                    id: 3,
+                    title: "Xây Dựng Kênh TikTok Y Khoa — Thiện Nhân Hospital",
+                    category: "tiktok",
+                    client: "Thiện Nhân Đà Nẵng & Quảng Ngãi",
+                    duration: "00:55",
+                    ratio: "9:16",
+                    tools: "Premiere Pro • CapCut PC • Quay Phim",
+                    thumb: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80",
+                    videoUrl: "https://drive.google.com/file/d/1K3fthWd1eqR9MKBhi-3KspiKpu6O2IzY/view?usp=drive_link",
+                    desc: "Lên kịch bản, trực tiếp quay và dựng chuỗi video TikTok tư vấn sức khỏe và truyền thông ưu đãi tại Đà Nẵng & Quảng Ngãi."
+                },
+                {
+                    id: 4,
+                    title: "TVC & Video Truyền Thông — Quà Tặng Quang Vũ",
+                    category: "tvc",
+                    client: "Công ty Quà Tặng Quang Vũ",
+                    duration: "01:30",
+                    ratio: "16:9",
+                    tools: "Premiere Pro • After Effects",
+                    thumb: "https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=900&q=80",
+                    videoUrl: "https://drive.google.com/file/d/1uaRRJcJA-9RR0p7PW80J3fwVaA8kGtzB/view?usp=drive_link",
+                    desc: "Quay dựng video giới thiệu xưởng sản xuất, sản phẩm quà tặng doanh nghiệp phục vụ chiến dịch Facebook Ads."
+                },
+                {
+                    id: 5,
+                    title: "Chuỗi Reels Bán Hàng Dịp Lễ — Hao Apple",
+                    category: "tiktok",
+                    client: "Hao Apple Store",
+                    duration: "00:40",
+                    ratio: "9:16",
+                    tools: "Premiere Pro • After Effects",
+                    thumb: "https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=900&q=80",
+                    videoUrl: "https://drive.google.com/file/d/19OyVuEH02hPL87jjQW5Nqo0M_VXKrd-r/view?usp=drive_link",
+                    desc: "Sản xuất video review nhanh, bắt trend TikTok/Reels kết hợp chạy quảng cáo chuyển đổi cao dịp lễ."
+                },
+                {
+                    id: 6,
+                    title: "Video Concept F&B — MR2 Coffee & Tea",
+                    category: "tiktok",
+                    client: "MR2 Coffee & Tea",
+                    duration: "00:45",
+                    ratio: "9:16",
+                    tools: "Quay Phim • Premiere Pro",
+                    thumb: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80",
+                    videoUrl: "https://drive.google.com/file/d/1I7IWHIX3p3MFp9c0usjY6fLjJBpc7bBu/view?usp=drive_link",
+                    desc: "Quay cận cảnh pha chế, không gian quán và dựng video ngắn thu hút khách hàng trẻ trên Facebook & TikTok."
+                },
+                {
+                    id: 7,
+                    title: "Recap Teambuilding & Year End Party Doanh Nghiệp",
+                    category: "event",
+                    client: "Dự Án Freelance Doanh Nghiệp",
+                    duration: "03:15",
+                    ratio: "16:9",
+                    tools: "Premiere Pro • Sound Design",
+                    thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80",
+                    videoUrl: "https://drive.google.com/file/d/1lCloqK3yMXufkteSyQoW0T0ADhRGKa36/view?usp=drive_link",
+                    desc: "Dựng phim tổng kết sự kiện Teambuilding, Year End Party, Half Year với nhịp dựng sôi động và cảm xúc."
+                },
+                {
+                    id: 8,
+                    title: "Video TVC Quảng Bá The An Herritage",
+                    category: "tvc",
+                    client: "The An Herritage",
+                    duration: "01:15",
+                    ratio: "16:9",
+                    tools: "Premiere Pro • Photoshop • Ai",
+                    thumb: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
+                    videoUrl: "https://drive.google.com/file/d/18IXr1m6DQHECZNqySbV5_zmcGQFk5IZS/view?usp=drive_link",
+                    desc: "Djwng video TVC Quảng bá The An Herritage"
+                }
+            ]
+        };
+
+        // Tự động đọc lại toàn bộ các link video & chỉnh sửa bạn đã lưu trên trình duyệt (Read-Only)
+        function loadSavedPortfolioData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return defaultPortfolioData;
+                const parsed = JSON.parse(raw);
+                return {
+                    ...defaultPortfolioData,
+                    ...parsed,
+                    avatarUrl: MY_AVATAR_PATH,
+                    projects: Array.isArray(parsed.projects) && parsed.projects.length > 0
+                        ? parsed.projects
+                        : defaultPortfolioData.projects
+                };
+            } catch (e) {
+                return defaultPortfolioData;
+            }
+        }
+
+        let portfolioData = loadSavedPortfolioData();
+        let currentFilter = 'all';
+
+        const categoryLabels = {
+            tiktok: 'TikTok / Reels',
+            motion: 'Motion Graphic',
+            wedding: 'Film Wedding',
+            tvc: 'TVC & Thương Hiệu',
+            event: 'Sự Kiện & YEP'
+        };
+
+        // Chuyển đổi link Google Drive sang link nhúng /embed
+        function parseVideoEmbedUrl(url) {
+            if (!url || !url.trim()) return null;
+            const cleanUrl = url.trim();
+
+            // Google Drive File URL
+            const driveMatch = cleanUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || cleanUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+            if (driveMatch && driveMatch[1]) {
+                return {
+                    type: 'iframe',
+                    src: `https://drive.google.com/file/d/${driveMatch[1]}/preview`
+                };
+            }
+
+            // YouTube URL
+            const ytMatch = cleanUrl.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            if (ytMatch && ytMatch[1]) {
+                return {
+                    type: 'iframe',
+                    src: `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`
+                };
+            }
+
+            // Direct MP4 / WebM
+            if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(cleanUrl)) {
+                return {
+                    type: 'video',
+                    src: cleanUrl
+                };
+            }
+
+            return {
+                type: 'external',
+                src: cleanUrl
+            };
+        }
+
+        // Đồng bộ dữ liệu cá nhân & avatar lên giao diện
+        function applyProfileData() {
+            const nameEl = document.getElementById('hero-name');
+            const bioEl = document.getElementById('hero-bio');
+            const phoneEl = document.getElementById('hero-phone');
+            const contactPhone = document.getElementById('contact-phone-display');
+            const contactEmail = document.getElementById('contact-email-display');
+            const contactAddr = document.getElementById('contact-address-display');
+
+            if (nameEl) nameEl.textContent = portfolioData.name;
+            if (bioEl) bioEl.textContent = portfolioData.bio;
+            if (phoneEl) phoneEl.textContent = portfolioData.phone;
+            if (contactPhone) contactPhone.textContent = portfolioData.phone;
+            if (contactEmail) contactEmail.textContent = portfolioData.email;
+            if (contactAddr) contactAddr.textContent = portfolioData.address;
+
+            document.querySelectorAll('.avatar-preview').forEach(img => {
+                img.src = MY_AVATAR_PATH;
+            });
+        }
+
+        // Render danh sách dự án video
+        function renderProjects(filter = 'all') {
+            currentFilter = filter;
+            const grid = document.getElementById('projects-grid');
+            if (!grid) return;
+
+            const filtered = filter === 'all'
+                ? portfolioData.projects
+                : portfolioData.projects.filter(p => p.category === filter);
+
+            grid.innerHTML = filtered.map(project => {
+                const isVertical = project.ratio === '9:16';
+                const hasLink = Boolean(project.videoUrl && project.videoUrl.trim());
+                const catLabel = categoryLabels[project.category] || 'Video Project';
+
+                return `
+                    <article onclick="openPlayer(${project.id})" class="work-item bento-card rounded-3xl overflow-hidden cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="relative aspect-video bg-slate-950 overflow-hidden border-b border-cyan-500/20">
+                                <img src="${project.thumb}" alt="${project.title}" onerror="this.src='https://placehold.co/800x450/0c0c18/00f3ff?text=VIDEO+PROJECT'" class="work-thumb w-full h-full object-cover transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#05050a] via-black/25 to-transparent"></div>
+
+                                <!-- Top Badges -->
+                                <div class="absolute top-3 inset-x-3 flex items-center justify-between gap-2">
+                                    <span class="px-2.5 py-1 rounded-lg bg-slate-950/90 border border-cyan-400/40 font-mono text-[10px] font-semibold text-studio-volt">
+                                        ${catLabel}
+                                    </span>
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="px-2 py-0.5 rounded bg-black/80 border border-pink-500/40 font-mono text-[10px] text-pink-300">
+                                            ${isVertical ? '9:16' : '16:9'}
+                                        </span>
+                                        <span class="px-2 py-0.5 rounded bg-black/80 border border-zinc-700 font-mono text-[10px] text-zinc-200">
+                                            ${project.duration}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Center Play Pill -->
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="play-pill w-12 h-12 rounded-full bg-slate-950/90 border border-cyan-400/70 text-studio-volt flex items-center justify-center transition-all duration-300 shadow-lg">
+                                        <i class="fa-solid fa-play ml-0.5 text-sm"></i>
+                                    </div>
+                                </div>
+
+                                <!-- Bottom Status -->
+                                <div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[11px] font-mono">
+                                    <span class="text-zinc-300 truncate">${project.client}</span>
+                                    ${hasLink
+                                        ? '<span class="text-studio-volt flex items-center gap-1 shrink-0"><i class="fa-solid fa-circle-check text-[10px]"></i> Ready</span>'
+                                        : '<span class="text-pink-400/90 shrink-0">Drive Folder</span>'
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="p-5">
+                                <h3 class="font-display font-bold text-base sm:text-lg text-white group-hover:text-studio-volt transition-colors line-clamp-2">
+                                    ${project.title}
+                                </h3>
+                                <p class="text-xs text-zinc-400 mt-2 line-clamp-2 leading-relaxed">
+                                    ${project.desc}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-5 pb-5 pt-2 flex items-center justify-between border-t border-cyan-500/10">
+                            <span class="font-mono text-[11px] text-zinc-400">${project.tools}</span>
+                            <span class="font-mono text-xs font-bold text-studio-volt group-hover:translate-x-1 transition-transform">
+                                Xem Video →
+                            </span>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // Lọc dự án theo danh mục
+        function filterWorks(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const isActive = btn.getAttribute('data-filter') === category;
+                if (isActive) {
+                    btn.className = 'filter-btn active px-4 py-2 rounded-xl text-xs font-bold cyber-btn-primary transition-all';
+                } else {
+                    btn.className = 'filter-btn px-4 py-2 rounded-xl text-xs font-medium bg-slate-950/90 text-zinc-300 hover:text-cyan-300 hover:border-cyan-500/40 border border-slate-800 transition-all';
+                }
+            });
+            renderProjects(category);
+        }
+
+        // Mở trình phát Video Modal
+        function openPlayer(projectId) {
+            const project = portfolioData.projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            const modal = document.getElementById('player-modal');
+            const container = document.getElementById('player-container');
+            const titleEl = document.getElementById('modal-title');
+            const descEl = document.getElementById('modal-desc');
+            const mediaBox = document.getElementById('modal-media-box');
+            const driveLink = document.getElementById('modal-drive-link');
+
+            const isVertical = project.ratio === '9:16';
+            if (isVertical) {
+                container.classList.remove('max-w-5xl');
+                container.classList.add('max-w-md');
+                mediaBox.classList.remove('aspect-video');
+                mediaBox.classList.add('aspect-[9/16]', 'max-h-[72vh]');
+            } else {
+                container.classList.remove('max-w-md');
+                container.classList.add('max-w-5xl');
+                mediaBox.classList.remove('aspect-[9/16]', 'max-h-[72vh]');
+                mediaBox.classList.add('aspect-video');
+            }
+
+            titleEl.textContent = project.title;
+            descEl.textContent = project.desc;
+            driveLink.href = (project.videoUrl && project.videoUrl.trim()) ? project.videoUrl.trim() : DRIVE_FOLDER_URL;
+
+            const parsed = parseVideoEmbedUrl(project.videoUrl);
+            if (parsed && parsed.type === 'iframe') {
+                mediaBox.innerHTML = `<iframe src="${parsed.src}" class="w-full h-full border-0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+            } else if (parsed && parsed.type === 'video') {
+                mediaBox.innerHTML = `<video src="${parsed.src}" controls autoplay class="w-full h-full object-contain bg-black"></video>`;
+            } else {
+                mediaBox.innerHTML = `
+                    <div class="p-8 text-center flex flex-col items-center justify-center gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-cyan-500/15 border border-cyan-400/40 text-studio-volt flex items-center justify-center text-2xl">
+                            <i class="fa-brands fa-google-drive"></i>
+                        </div>
+                        <div class="max-w-md">
+                            <h4 class="font-display font-bold text-base text-white mb-1">${project.title}</h4>
+                            <p class="text-xs text-zinc-400 leading-relaxed">
+                                Video sản phẩm này được lưu trữ chất lượng cao trong thư mục Google Drive của Nguyễn Đức Nghĩa. Bấm nút bên dưới để mở xem trực tiếp.
+                            </p>
+                        </div>
+                        <a href="${DRIVE_FOLDER_URL}" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl cyber-btn-primary font-bold text-xs">
+                            Mở Thư Mục Video Trên Google Drive ↗
+                        </a>
+                    </div>
+                `;
+            }
+
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePlayer() {
+            const modal = document.getElementById('player-modal');
+            const mediaBox = document.getElementById('modal-media-box');
+            modal.classList.add('hidden');
+            mediaBox.innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        // Mở / Đóng Modal CV trực tiếp
+        function openCvModal() {
+            document.getElementById('cv-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCvModal() {
+            document.getElementById('cv-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Đóng modal khi bấm nền tối hoặc phím ESC
+        document.getElementById('player-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'player-modal') closePlayer();
+        });
+        document.getElementById('cv-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'cv-modal') closeCvModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePlayer();
+                closeCvModal();
+            }
+        });
+
+        // Khởi chạy trang
+        window.addEventListener('DOMContentLoaded', () => {
+            applyProfileData();
+            renderProjects('all');
+        });
+    </script>
+</body>
+</html>
